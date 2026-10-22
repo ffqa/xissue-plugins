@@ -30,6 +30,7 @@ jobs:
         run: |
           printf '%s' '{"event":"pr_merged","project":{"targetBranch":"main"},"pr":{"number":1,"baseRefName":"main"}}' \
             | plugins/follow-commit-watcher/run.py
+          rm -f plugins/follow-commit-watcher/state.json
       - name: slack-notifier rejects missing webhook
         run: |
           if printf '%s' '{"event":"notification_dispatch","notification":{}}' | plugins/slack-notifier/run.py; then
@@ -40,6 +41,7 @@ jobs:
         run: |
           printf '%s' '{"event":"run_finished","project":{"name":"p"},"issue":{"key":"L-1"},"run":{"id":1,"status":"failed","error":"boom"}}' \
             | plugins/run-audit/run.py | python3 -c 'import json,sys; assert json.load(sys.stdin)["actions"][0]["type"] == "notify"'
+          rm -f plugins/run-audit/audit.jsonl
       - name: Ensure no runtime state committed
         run: |
           test ! -e plugins/follow-commit-watcher/state.json
