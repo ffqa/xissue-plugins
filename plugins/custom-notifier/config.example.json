@@ -1,0 +1,8 @@
+{
+  "macos_desktop": false,
+  "feishu_webhook": "",
+  "wecom_webhook": "",
+  "dingtalk_webhook": "",
+  "dingtalk_secret": "",
+  "bark_url": ""
+}

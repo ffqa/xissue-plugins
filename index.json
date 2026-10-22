@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "plugins": [
+    {
+      "name": "custom-notifier",
+      "version": "1.1.0",
+      "description": "Forward notifications to Feishu, WeCom, DingTalk, Bark, or macOS",
+      "repo": "ffqa/xissue-plugins",
+      "path": "plugins/custom-notifier",
+      "events": ["notification_dispatch"],
+      "permissions": ["network", "process"]
+    },
+    {
+      "name": "follow-commit-watcher",
+      "version": "1.1.0",
+      "description": "Track post-merge commits and selected authors with file previews",
+      "repo": "ffqa/xissue-plugins",
+      "path": "plugins/follow-commit-watcher",
+      "events": ["branch_push", "pr_merged"],
+      "permissions": ["repo:read", "process", "notify"]
+    },
+    {
+      "name": "slack-notifier",
+      "version": "1.0.0",
+      "description": "Send xIssue notifications to Slack",
+      "repo": "ffqa/xissue-plugins",
+      "path": "plugins/slack-notifier",
+      "events": ["notification_dispatch"],
+      "permissions": ["network"]
+    },
+    {
+      "name": "run-audit",
+      "version": "1.0.0",
+      "description": "Append run lifecycle events to a JSONL audit log",
+      "repo": "ffqa/xissue-plugins",
+      "path": "plugins/run-audit",
+      "events": ["run_started", "run_finished"],
+      "permissions": ["notify"]
+    }
+  ]
+}

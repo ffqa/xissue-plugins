@@ -1,0 +1,11 @@
+apiVersion: 1
+name: run-audit
+version: 1.0.0
+description: Append run lifecycle events to a JSONL audit log and optionally notify on failure
+author: ffqa
+entrypoint: run.py
+events:
+  - run_started
+  - run_finished
+permissions:
+  - notify

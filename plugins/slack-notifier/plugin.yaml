@@ -1,0 +1,10 @@
+apiVersion: 1
+name: slack-notifier
+version: 1.0.0
+description: Send xIssue notifications to Slack with Block Kit formatting
+author: ffqa
+entrypoint: run.py
+events:
+  - notification_dispatch
+permissions:
+  - network

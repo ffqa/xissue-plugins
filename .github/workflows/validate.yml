@@ -1,0 +1,46 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  plugins:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Validate manifests and index
+        run: |
+          python3 - <<'PY'
+          import json, subprocess
+          index = json.load(open("index.json"))
+          assert index["version"] == 1
+          for entry in index["plugins"]:
+              subprocess.run(["python3", "scripts/validate_manifest.py", entry["path"]], check=True)
+          PY
+      - name: custom-notifier smoke
+        run: |
+          printf '%s' '{"event":"notification_dispatch","notification":{"title":"test","body":"hello"}}' \
+            | plugins/custom-notifier/run.py
+      - name: follow-commit-watcher smoke
+        run: |
+          printf '%s' '{"event":"pr_merged","project":{"targetBranch":"main"},"pr":{"number":1,"baseRefName":"main"}}' \
+            | plugins/follow-commit-watcher/run.py
+      - name: slack-notifier rejects missing webhook
+        run: |
+          if printf '%s' '{"event":"notification_dispatch","notification":{}}' | plugins/slack-notifier/run.py; then
+            echo "expected nonzero exit without webhook" >&2
+            exit 1
+          fi
+      - name: run-audit smoke
+        run: |
+          printf '%s' '{"event":"run_finished","project":{"name":"p"},"issue":{"key":"L-1"},"run":{"id":1,"status":"failed","error":"boom"}}' \
+            | plugins/run-audit/run.py | python3 -c 'import json,sys; assert json.load(sys.stdin)["actions"][0]["type"] == "notify"'
+      - name: Ensure no runtime state committed
+        run: |
+          test ! -e plugins/follow-commit-watcher/state.json
+          test ! -e plugins/run-audit/audit.jsonl

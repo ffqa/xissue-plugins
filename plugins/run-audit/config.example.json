@@ -1,0 +1,4 @@
+{
+  "log_file": "audit.jsonl",
+  "notify_on_failure": true
+}

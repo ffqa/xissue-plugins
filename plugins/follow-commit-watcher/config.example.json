@@ -1,0 +1,7 @@
+{
+  "target_authors": ["release-bot", "ci-bot"],
+  "max_post_merge_check": 3,
+  "watch_files": ["package.json", "go.mod", "CHANGELOG.md", "VERSION"],
+  "auto_create_issue_on_keyword": ["breaking", "rollback"],
+  "mirrors_dir": "~/.xissue/mirrors"
+}
