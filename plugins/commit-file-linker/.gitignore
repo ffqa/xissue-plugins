@@ -1,0 +1,5 @@
+# 本地实际配置文件
+config.json
+
+# 状态缓存文件
+.linker_state.json

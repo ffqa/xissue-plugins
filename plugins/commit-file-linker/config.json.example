@@ -1,0 +1,24 @@
+{
+  "rules": [
+    {
+      "name": "Dev 分支关键提交文件直达示例",
+      "branch": "dev",
+      "authors": [
+        "aaa"
+      ],
+      "keywords": [
+        "report(bbbb)",
+        "ccc-xxx"
+      ],
+      "target_files": [
+        "abc/def/xxx.md"
+      ],
+      "actions": [
+        "notify"
+      ],
+      "preview_file": true,
+      "preview_lines": 10,
+      "auto_open_browser": false
+    }
+  ]
+}

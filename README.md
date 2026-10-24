@@ -9,6 +9,7 @@ xissue plugin install custom-notifier
 xissue plugin install follow-commit-watcher
 xissue plugin install slack-notifier
 xissue plugin install run-audit
+xissue plugin install commit-file-linker
 xissue plugin list
 ```
 
@@ -31,6 +32,7 @@ Existing installs are preserved unless `--force` is passed.
 | `follow-commit-watcher` | `branch_push`, `pr_merged` | Post-merge and selected-author commit tracking |
 | `slack-notifier` | `notification_dispatch` | Slack incoming webhook |
 | `run-audit` | `run_started`, `run_finished` | JSONL audit log and failure notification |
+| `commit-file-linker` | `branch_push` | Link matching branch/author/keyword commits to a target file (web + local editor) |
 
 `index.json` is the machine-readable catalog consumed by xIssue. Entries may
 point at another repository with a `repo` and `path`.
@@ -43,8 +45,8 @@ Plugins use manifest API v1. Build one from
 - stdin: one JSON event payload.
 - stdout: `{"actions": [...]}` or empty.
 - timeout: 15 seconds per invocation.
-- lifecycle events (`issue_*`, `run_*`, `pr_created`) only execute `notify`
-  actions; mutating actions are logged and ignored to prevent recursion.
+- lifecycle events use an explicit event/action allowlist (labels, follow-up issues,
+  PR review runs) with recursion guards; see the plugin guide for the matrix.
 - plugins run as your user; `permissions` are declarations, not a sandbox.
 
 Full event and action documentation:
