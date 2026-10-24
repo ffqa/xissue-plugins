@@ -1,0 +1,12 @@
+apiVersion: 1
+name: commit-file-linker
+version: 1.0.0
+description: 监控指定分支与指定用户的推送，当提交标题/内容命中关键字时，生成直达该分支下指定文件的访问链接（支持 GitHub/GitLab/Gitee/本地编辑器）并发出通知
+author: xIssue Team
+entrypoint: run.py
+events:
+  - branch_push
+permissions:
+  - repo:read
+  - process
+  - notify

@@ -7,8 +7,13 @@
       "description": "Forward notifications to Feishu, WeCom, DingTalk, Bark, or macOS",
       "repo": "ffqa/xissue-plugins",
       "path": "plugins/custom-notifier",
-      "events": ["notification_dispatch"],
-      "permissions": ["network", "process"]
+      "events": [
+        "notification_dispatch"
+      ],
+      "permissions": [
+        "network",
+        "process"
+      ]
     },
     {
       "name": "follow-commit-watcher",
@@ -16,8 +21,15 @@
       "description": "Track post-merge commits and selected authors with file previews",
       "repo": "ffqa/xissue-plugins",
       "path": "plugins/follow-commit-watcher",
-      "events": ["branch_push", "pr_merged"],
-      "permissions": ["repo:read", "process", "notify"]
+      "events": [
+        "branch_push",
+        "pr_merged"
+      ],
+      "permissions": [
+        "repo:read",
+        "process",
+        "notify"
+      ]
     },
     {
       "name": "slack-notifier",
@@ -25,8 +37,12 @@
       "description": "Send xIssue notifications to Slack",
       "repo": "ffqa/xissue-plugins",
       "path": "plugins/slack-notifier",
-      "events": ["notification_dispatch"],
-      "permissions": ["network"]
+      "events": [
+        "notification_dispatch"
+      ],
+      "permissions": [
+        "network"
+      ]
     },
     {
       "name": "run-audit",
@@ -34,8 +50,28 @@
       "description": "Append run lifecycle events to a JSONL audit log",
       "repo": "ffqa/xissue-plugins",
       "path": "plugins/run-audit",
-      "events": ["run_started", "run_finished"],
-      "permissions": ["notify"]
+      "events": [
+        "run_started",
+        "run_finished"
+      ],
+      "permissions": [
+        "notify"
+      ]
+    },
+    {
+      "name": "commit-file-linker",
+      "version": "1.0.0",
+      "description": "Link a watched branch/author/keyword commit to a specific file on GitHub/GitLab/Gitee or in the local editor",
+      "repo": "ffqa/xissue-plugins",
+      "path": "plugins/commit-file-linker",
+      "events": [
+        "branch_push"
+      ],
+      "permissions": [
+        "repo:read",
+        "process",
+        "notify"
+      ]
     }
   ]
 }
