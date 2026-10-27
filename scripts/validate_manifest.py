@@ -23,6 +23,7 @@ EVENTS = {
     "*",
 }
 PERMISSIONS = {"repo:read", "repo:write", "network", "notify", "process"}
+UI_SLOTS = {"project.page", "project.header", "issue.page", "issue.actions"}
 NAME = re.compile(r"^[a-z0-9][a-z0-9._-]{0,63}$")
 
 
@@ -61,6 +62,24 @@ def main():
     unknown_permissions = [perm for perm in permissions if perm not in PERMISSIONS]
     if unknown_permissions:
         return fail(f"unknown permissions: {unknown_permissions}")
+    ui = manifest.get("ui")
+    if ui is not None:
+        if not isinstance(ui, dict):
+            return fail("ui must be a mapping")
+        ui_entry = ui.get("entry")
+        if not isinstance(ui_entry, str):
+            return fail("ui.entry must be a string")
+        ui_entry = ui_entry.replace("\\", "/")
+        if os.path.isabs(ui_entry) or ".." in ui_entry.split("/") or not ui_entry.startswith("ui/"):
+            return fail("ui.entry must be a relative path under ui/")
+        if not os.path.isfile(os.path.join(directory, ui_entry)):
+            return fail(f"missing ui.entry {ui_entry}")
+        slots = ui.get("slots", [])
+        if not isinstance(slots, list):
+            return fail("ui.slots must be a list")
+        unknown_slots = [slot for slot in slots if slot not in UI_SLOTS]
+        if unknown_slots:
+            return fail(f"unknown ui slots: {unknown_slots}")
     print(json.dumps({"ok": True, "plugin": manifest["name"]}))
     return 0
 

@@ -10,6 +10,7 @@ xissue plugin install follow-commit-watcher
 xissue plugin install slack-notifier
 xissue plugin install run-audit
 xissue plugin install commit-file-linker
+xissue plugin install ui-demo
 xissue plugin list
 ```
 
@@ -33,6 +34,7 @@ Existing installs are preserved unless `--force` is passed.
 | `slack-notifier` | `notification_dispatch` | Slack incoming webhook |
 | `run-audit` | `run_started`, `run_finished` | JSONL audit log and failure notification |
 | `commit-file-linker` | `branch_push` | Link matching branch/author/keyword commits to a target file (web + local editor) |
+| `ui-demo` | `notification_dispatch` | Standalone plugin page plus `project.page` / `issue.actions` slots |
 
 `index.json` is the machine-readable catalog consumed by xIssue. Entries may
 point at another repository with a `repo` and `path`.

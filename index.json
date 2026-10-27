@@ -72,6 +72,19 @@
         "process",
         "notify"
       ]
+    },
+    {
+      "name": "ui-demo",
+      "version": "1.0.0",
+      "description": "Sandbox-aware plugin UI demo with a standalone page and project/issue slots",
+      "repo": "ffqa/xissue-plugins",
+      "path": "plugins/ui-demo",
+      "events": [
+        "notification_dispatch"
+      ],
+      "permissions": [
+        "notify"
+      ]
     }
   ]
 }
