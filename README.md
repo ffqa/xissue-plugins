@@ -48,6 +48,7 @@ Plugins use manifest API v1. Build one from
 - stdout: `{"actions": [...]}` or empty.
 - timeout: 15 seconds per invocation.
 - UI slots: `project.header`, `project.page`, `project.toolbar`, `issue.actions`, `issue.page`, `issue.toolbar`; toolbar slots can request a host modal via `xissue:open-modal`.
+- AI: `GET /api/plugins/ai` returns the default agent; `POST /api/plugins/ai` runs a text-only prompt. Sandboxed UIs use the `xissue:ai` / `xissue:ai-result` bridge.
 - lifecycle events use an explicit event/action allowlist (labels, follow-up issues,
   PR review runs) with recursion guards; see the plugin guide for the matrix.
 - plugins run as your user; `permissions` are declarations, not a sandbox.
