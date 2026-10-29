@@ -23,7 +23,7 @@ EVENTS = {
     "*",
 }
 PERMISSIONS = {"repo:read", "repo:write", "network", "notify", "process"}
-UI_SLOTS = {"project.page", "project.header", "issue.page", "issue.actions"}
+UI_SLOTS = {"project.page", "project.header", "project.toolbar", "issue.page", "issue.actions", "issue.toolbar"}
 NAME = re.compile(r"^[a-z0-9][a-z0-9._-]{0,63}$")
 
 
